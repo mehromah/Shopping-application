@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">سامانه همراه مالی</string>
+    <string name="all_home">خانه</string>
+    <string name="all_categories">دسته بندی</string>
+    <string name="all_bookmarks">کتابخانه</string>
+    <string name="all_videos">ویدیو</string>
+    <string name="title_home">خانه</string>
+    <string name="title_dashboard">سفارشات شخصی</string>
+    <string name="title_notifications">سرفصل حساب</string>
+</resources>
