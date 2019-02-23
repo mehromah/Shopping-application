@@ -33,7 +33,10 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.BannerView
 
     @Override
     public void onBindViewHolder(@NonNull BannerViewHolder holder, int position) {
-        Picasso.get().load(banners.get(position).getImage()).into(holder.imageView);
+        //Picasso.get().load(banners.get(position).getImage()).into(holder.imageView);
+      //  https://www.bamilo.com/category/smartphone_tablet_mobile?tags[]=wh
+
+        Picasso.get().load("https://www.bamilo.com/category/smartphone_tablet_mobile?tags[]=wh").into(holder.imageView);
     }
 
     @Override

@@ -8,6 +8,12 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.SerializedName;
 @Entity(tableName = "tbl_PRSMBL003")
 public class PRSMBL003 {
+    public static final int SORT_LATEST = 0;
+    public static final int SORT_POPULAR = 1;
+    public static final int SORT_PRICE_HIGHT_TO_LOW = 2;
+    public static final int SORT_PRICE_LOW_TO_HIGH = 3;
+
+
     @PrimaryKey
     @NonNull
     @SerializedName("CMBL003001")
