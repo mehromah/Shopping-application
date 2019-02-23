@@ -31,6 +31,8 @@ public class PRSMBL003Adapter extends RecyclerView.Adapter<PRSMBL003Adapter.PRSM
     @Override
     public void onBindViewHolder(@NonNull PRSMBL003ViewHolder holder, int position) {
         holder.PRSMBL003TitleTextView.setText(Table.get(position).getCMBL003011());
+        holder.PRSMBL003StockTextView.setText(Table.get(position).getNMBL003015());
+        holder.PRSMBL003GroupNameTextView.setText(Table.get(position).getCMBL003016());
 
     }
 
@@ -55,13 +57,16 @@ public class PRSMBL003Adapter extends RecyclerView.Adapter<PRSMBL003Adapter.PRSM
 
     public class PRSMBL003ViewHolder extends RecyclerView.ViewHolder {
         private TextView PRSMBL003TitleTextView;
+        private TextView PRSMBL003StockTextView;
+        private TextView PRSMBL003GroupNameTextView;
 
 
 
         public PRSMBL003ViewHolder(View itemView) {
             super(itemView);
             PRSMBL003TitleTextView = itemView.findViewById(R.id.tv_prsmbl003_title);
-
+            PRSMBL003StockTextView = itemView.findViewById(R.id.tv_prsmbl003_stock);
+            PRSMBL003GroupNameTextView = itemView.findViewById(R.id.tv_prsmbl003_groupName);
         }
 
 //        public void bindProduct(Product product) {
