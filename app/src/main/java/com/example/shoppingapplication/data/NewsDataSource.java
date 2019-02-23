@@ -26,4 +26,6 @@ public interface NewsDataSource {
     Single<List<PRSMBL009>> getPRSMBL009();
 
 
+
+
 }
