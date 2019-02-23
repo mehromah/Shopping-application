@@ -53,7 +53,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private PrimaryDrawerItem cartDrawerItem;
     private RecyclerView prsmbl003RecyclerView;
     private RecyclerView bannerRecyclerView;
+    private RecyclerView productRecyclerView;
 
+    private ProductAdapter productAdapter;
     private PRSMBL003Adapter prsmbl003Adapter;
     private PRSMBL004Adapter prsmbl004Adapter;
     private PRSMBL005Adapter prsmbl005Adapter;
@@ -130,9 +132,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //            }
 //        });
 
+        productRecyclerView = findViewById(R.id.rv_main_popularProducts);
+        productRecyclerView.setLayoutManager(new LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, true
+        ));
+
         prsmbl003RecyclerView = findViewById(R.id.rv_main_latestProducts);
         prsmbl003RecyclerView.setLayoutManager(new LinearLayoutManager(
-                this, LinearLayoutManager.VERTICAL, true
+                this, LinearLayoutManager.HORIZONTAL, true
         ));
 
         bannerRecyclerView = findViewById(R.id.rv_main_slider);
@@ -228,8 +235,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
                 if (response.body() != null && response.body().getPrsmbl003List().size() > 0) {
                     data = response.body().getPrsmbl003List();
+                    data1 = response.body().getPrsmbl004List();
+                    data2 = response.body().getPrsmbl005List();
                     prsmbl003Adapter = new PRSMBL003Adapter(data);
                     prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
+                    productAdapter = new ProductAdapter(data,data1,data2);
+                    productRecyclerView.setAdapter(productAdapter);
+
+
+
                     Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
 
                 }
