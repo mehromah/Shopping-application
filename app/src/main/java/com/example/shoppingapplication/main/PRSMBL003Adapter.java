@@ -11,12 +11,13 @@ import com.example.shoppingapplication.R;
 import com.example.shoppingapplication.model.PRSMBL003;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class PRSMBL003Adapter extends RecyclerView.Adapter<PRSMBL003Adapter.PRSMBL003ViewHolder> {
-    private ArrayList<PRSMBL003> Table ;
+    private List<PRSMBL003> Table ;
 
-    public PRSMBL003Adapter(ArrayList<PRSMBL003> Table) {
+    public PRSMBL003Adapter(List<PRSMBL003> Table) {
         this.Table = Table;
     }
 
