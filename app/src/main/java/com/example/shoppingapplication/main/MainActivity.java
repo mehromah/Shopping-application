@@ -228,6 +228,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
                 if (response.body() != null && response.body().getPrsmbl003List().size() > 0) {
                     data = response.body().getPrsmbl003List();
+                    prsmbl003Adapter = new PRSMBL003Adapter(data);
+                    prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
                     Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
 
                 }
