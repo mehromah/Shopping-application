@@ -1,5 +1,7 @@
 package com.example.shoppingapplication.model.api;
 
+import com.example.shoppingapplication.model.Banner;
+
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -15,6 +17,9 @@ public interface ApiService {
 
     @GET("values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>003TOTALSELECT</proc><P1>ADMIN</P1><P2>123456</P2><P3>MBLTYPEVISIT1</P3></Table></NewDataSet>")
     Call<JSONUserResponse> getUsersJSON();
+
+//    @GET("")
+//    Call<Banner> getBanner();
 //
 //    @FormUrlEncoded
 //    @POST("values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>003TOTALSELECT</proc><P1> myUsername </P1><P2>myPassword</P2><P3> MBLTYPEVISIT1</P3></Table></NewDataSet>")
