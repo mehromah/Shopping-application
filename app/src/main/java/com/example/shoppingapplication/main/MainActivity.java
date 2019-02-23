@@ -1,5 +1,6 @@
 package com.example.shoppingapplication.main;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,8 +28,12 @@ import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
 import com.mikepenz.materialdrawer.holder.BadgeStyle;
+import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
+import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
+import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -68,6 +74,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private Stack<Integer> horizontalStack = new Stack<>();
 
 
+    private ImageView menuBtn;
+    public Drawer result;
+
+
+
 //    private BottomNavigation bottomNavigation;
 
 
@@ -86,15 +97,164 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = findViewById(R.id.message);
+
+
+
         setupViews();
+        addDrawer();
+        menuBtn=findViewById(R.id.iv_main_menu);
+
+        menuBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                result.openDrawer();
+
+
+            }
+        });
 
 
         drawerFont = ResourcesCompat.getFont(this, R.font.primary_regular);
         userInfoManager = new UserInfoManager1(this);
         viewModel = new MainViewModel();
-        //    setupDrawer();
+//        setupDrawer();
         observe();
     }
+
+    private void addDrawer() {
+        new DrawerBuilder().withActivity(this).build();
+
+        //if you want to update the items at a later time it is recommended to keep it in a variable
+        PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("صفحه نخست");
+        SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("تنظیمات");
+        SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(2).withName("اطلاعات تماس");
+
+
+
+        // Create the AccountHeader
+        AccountHeader headerResult = new AccountHeaderBuilder()
+                .withActivity(this)
+                .withHeaderBackground(R.drawable.header)
+                .addProfiles(
+                        new ProfileDrawerItem().withName("سامانه همراه ملی").withEmail("http://www.hesabsazanparsian.com/")
+                )
+                .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
+                    @Override
+                    public boolean onProfileChanged(View view, IProfile profile, boolean currentProfile) {
+                        return false;
+                    }
+                })
+                .build();
+
+//create the drawer and remember the `Drawer` result object
+        result = new DrawerBuilder()
+                .withActivity(this)
+                // .withToolbar(toolbar)
+
+                .addDrawerItems(
+                        item1,
+                        new DividerDrawerItem(),
+                        item2,
+                        new SecondaryDrawerItem().withName("حساب کاربری"),
+                        new SecondaryDrawerItem().withName("سفارشات شخصی"),
+                        new SecondaryDrawerItem().withName("سفارشات دیگران"),
+                        new SecondaryDrawerItem().withName("سرفصل کالاها"),
+                        new SecondaryDrawerItem().withName("پرونده ها"),
+                        new SecondaryDrawerItem().withName("گزارشات خروجی"),
+                        new SecondaryDrawerItem().withName("تنظیمات"),
+                        new DividerDrawerItem(),
+
+
+                        new SecondaryDrawerItem().withName("خروج"),
+                        item3
+                )
+
+                .withAccountHeader(headerResult)
+                .withOnDrawerItemClickListener(new Drawer.OnDrawerItemClickListener() {
+                    @Override
+                    public boolean onItemClick(View view, int position, IDrawerItem drawerItem) {
+                        // do something with the clicked item :D
+
+                        if (drawerItem != null) {
+                            Intent intent = null;
+                            if (drawerItem.getIdentifier() == 1) {
+                                intent = new Intent(MainActivity.this,ReportActivity.class);
+                            } else if (drawerItem.getIdentifier() == 2) {
+                                intent = new Intent(MainActivity.this,OrdersActivity.class);
+                            }
+                            /*else if (drawerItem.getIdentifier() == 3) {
+                                intent = new Intent(DrawerActivity.this, MultiDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 4) {
+                                intent = new Intent(DrawerActivity.this, NonTranslucentDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 5) {
+                                intent = new Intent(DrawerActivity.this, AdvancedActivity.class);
+                            } else if (drawerItem.getIdentifier() == 7) {
+                                intent = new Intent(DrawerActivity.this, EmbeddedDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 8) {
+                                intent = new Intent(DrawerActivity.this, FullscreenDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 9) {
+                                intent = new Intent(DrawerActivity.this, CustomContainerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 10) {
+                                intent = new Intent(DrawerActivity.this, MenuDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 11) {
+                                intent = new Intent(DrawerActivity.this, MiniDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 12) {
+                                intent = new Intent(DrawerActivity.this, FragmentActivity.class);
+                            } else if (drawerItem.getIdentifier() == 13) {
+                                intent = new Intent(DrawerActivity.this, CollapsingToolbarActivity.class);
+                            } else if (drawerItem.getIdentifier() == 14) {
+                                intent = new Intent(DrawerActivity.this, PersistentDrawerActivity.class);
+                            } else if (drawerItem.getIdentifier() == 15) {
+                                intent = new Intent(DrawerActivity.this, CrossfadeDrawerLayoutActvitiy.class);
+                            } else if (drawerItem.getIdentifier() == 20) {
+                                intent = new LibsBuilder()
+                                        .withFields(R.string.class.getFields())
+                                        .withActivityStyle(Libs.ActivityStyle.LIGHT_DARK_TOOLBAR)
+                                        .intent(DrawerActivity.this);
+                            }*/
+//                            if (intent != null) {
+//                                MainActivity.this.startActivity(intent);
+//                            }
+                        }
+
+                        return false;
+                    }
+                })
+
+                .withShowDrawerOnFirstLaunch(true)
+                .build();
+
+
+        //set the selection to the item with the identifier 1
+        result.setSelection(1);
+//set the selection to the item with the identifier 2
+        result.setSelection(item2);
+//set the selection and also fire the `onItemClick`-listener
+        result.setSelection(1, true);
+
+
+
+
+
+//the result object also allows you to add new items, remove items, add footer, sticky footer, ..
+        result.addItem(new DividerDrawerItem());
+//        result.addStickyFooterItem(new PrimaryDrawerItem().withName("StickyFooterItem"));
+
+//remove items with an identifier
+        result.removeItem(2);
+
+//open / close the drawer
+        result.openDrawer();
+        result.closeDrawer();
+
+//get the reference to the `DrawerLayout` itself
+        result.getDrawerLayout();
+
+
+    }
+
+
+
 
     private void setupViews() {
 //        progressBar = findViewById(R.id.frame_main_progressBarContainer);
