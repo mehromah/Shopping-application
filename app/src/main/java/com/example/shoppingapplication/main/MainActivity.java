@@ -249,6 +249,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             public void onResponse(Call<JSONUserResponse> call, Response<JSONUserResponse> response) {
                 if (response.body() != null && response.body().getTable().size() > 0) {
                     Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
+
+
                 }
 
 
