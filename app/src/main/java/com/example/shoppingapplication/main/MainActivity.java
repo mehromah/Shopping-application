@@ -52,6 +52,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private TextView cartItemCountBadge;
     private PrimaryDrawerItem cartDrawerItem;
     private RecyclerView prsmbl003RecyclerView;
+    private RecyclerView bannerRecyclerView;
+
     private PRSMBL003Adapter prsmbl003Adapter;
     private PRSMBL004Adapter prsmbl004Adapter;
     private PRSMBL005Adapter prsmbl005Adapter;
@@ -132,6 +134,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         prsmbl003RecyclerView.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.VERTICAL, true
         ));
+
+        bannerRecyclerView = findViewById(R.id.rv_main_slider);
+        bannerRecyclerView.setLayoutManager(new LinearLayoutManager(
+                this,LinearLayoutManager.HORIZONTAL,true
+        ));
+        bannerAdapter = new BannerAdapter();
+        bannerRecyclerView.setAdapter(bannerAdapter);
+
+
+
+
     }
 
     private void setupDrawer() {
