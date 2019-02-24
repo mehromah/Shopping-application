@@ -259,7 +259,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
 
-    private void setupViews() {
+   private void setupViews() {
 //        progressBar = findViewById(R.id.frame_main_progressBarContainer);
 
 //        bottomNavigation = findViewById(R.id.bottomNavigation_main);
