@@ -25,6 +25,7 @@ import com.example.shoppingapplication.model.api.JSONUserResponse;
 import com.example.shoppingapplication.model.api.JsonResponse;
 import com.example.shoppingapplication.slider.MainSliderAdapter;
 import com.example.shoppingapplication.slider.PicassoImageLoadingService;
+import com.example.shoppingapplication.sortList.SortAdapter;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -80,6 +81,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private ImageView menuBtn;
     public Drawer result;
 
+
+    public static final String EXTRA_KEY_SORT = "sort";
+    private int sortType;
 
 
 //    private BottomNavigation bottomNavigation;
@@ -267,6 +271,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
        Slider slider = findViewById(R.id.banner_slider1);
        slider.setAdapter(new MainSliderAdapter());
+
+
+       RecyclerView sortChipsRv = findViewById(R.id.rv_list_category);
+       sortChipsRv.setLayoutManager(new LinearLayoutManager(
+               this, LinearLayoutManager.HORIZONTAL, true
+       ));
+//       sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
+//           @Override
+//           public void onClick(int sortType) {
+//               MainActivity.this.sortType = sortType;
+//               observe();
+//           }
+//       }));
 
 //        progressBar = findViewById(R.id.frame_main_progressBarContainer);
 

@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.shoppingapplication.R;
@@ -51,6 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
+        private ImageView PRSMBL003ImageView;
         private TextView PRSMBL003TitleTextView;
         private TextView PRSMBL003StockTextView;
         private TextView PRSMBL003GroupNameTextView;
