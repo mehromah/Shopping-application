@@ -89,7 +89,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //    private BottomNavigation bottomNavigation;
 
 
-
     private TextView timerTextView;
 
     private TextView mTextMessage;
@@ -106,12 +105,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         mTextMessage = findViewById(R.id.message);
 
 
-
         setupViews();
-       addDrawer();
+        addDrawer();
 //              setupDrawer();
 
-        menuBtn=findViewById(R.id.iv_main_menu);
+        menuBtn = findViewById(R.id.iv_main_menu);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,7 +134,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         PrimaryDrawerItem item1 = new PrimaryDrawerItem().withIdentifier(1).withName("صفحه نخست");
         SecondaryDrawerItem item2 = new SecondaryDrawerItem().withIdentifier(2).withName("تنظیمات");
         SecondaryDrawerItem item3 = new SecondaryDrawerItem().withIdentifier(2).withName("اطلاعات تماس");
-
 
 
         // Create the AccountHeader
@@ -187,9 +184,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                         if (drawerItem != null) {
                             Intent intent = null;
                             if (drawerItem.getIdentifier() == 1) {
-                                intent = new Intent(MainActivity.this,ReportActivity.class);
+                                intent = new Intent(MainActivity.this, ReportActivity.class);
                             } else if (drawerItem.getIdentifier() == 2) {
-                                intent = new Intent(MainActivity.this,OrdersActivity.class);
+                                intent = new Intent(MainActivity.this, OrdersActivity.class);
                             }
                             /*else if (drawerItem.getIdentifier() == 3) {
                                 intent = new Intent(DrawerActivity.this, MultiDrawerActivity.class);
@@ -242,9 +239,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         result.setSelection(1, true);
 
 
-
-
-
 //the result object also allows you to add new items, remove items, add footer, sticky footer, ..
         result.addItem(new DividerDrawerItem());
 //        result.addStickyFooterItem(new PrimaryDrawerItem().withName("StickyFooterItem"));
@@ -264,35 +258,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
+    private void setupViews() {
+        Slider.init(new PicassoImageLoadingService(this));
+
+        Slider slider = findViewById(R.id.banner_slider1);
+        slider.setAdapter(new MainSliderAdapter());
 
 
-   private void setupViews() {
-       Slider.init(new PicassoImageLoadingService(this));
-
-       Slider slider = findViewById(R.id.banner_slider1);
-       slider.setAdapter(new MainSliderAdapter());
-
-
-       RecyclerView sortChipsRv = findViewById(R.id.rv_list_category);
-       sortChipsRv.setLayoutManager(new LinearLayoutManager(
-               this, LinearLayoutManager.HORIZONTAL, true
-       ));
+        RecyclerView sortChipsRv = findViewById(R.id.rv_list_category);
+        sortChipsRv.setLayoutManager(new LinearLayoutManager(
+                this, LinearLayoutManager.HORIZONTAL, true
+        ));
 
 
-
-       sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
-           @Override
-           public void onClick(int sortType) {
-               MainActivity.this.sortType = sortType;
-              // observe();
-           }
-       }));
-
-
-
-
-
-
+        sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
+            @Override
+            public void onClick(int sortType) {
+                MainActivity.this.sortType = sortType;
+                // observe();
+            }
+        }));
 
 
 //       sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
@@ -354,8 +339,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //        ));
 //        bannerAdapter = new BannerAdapter();
 //        bannerRecyclerView.setAdapter(bannerAdapter);
-
-
 
 
     }
@@ -445,12 +428,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     data2 = response.body().getPrsmbl005List();
                     prsmbl003Adapter = new PRSMBL003Adapter(data);
                     prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
-                    productAdapter = new ProductAdapter(data,data1,data2);
+                    productAdapter = new ProductAdapter(data, data1, data2);
                     productRecyclerView.setAdapter(productAdapter);
 
 
 
-                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
+                    Long requestTime = response.raw().sentRequestAtMillis();
+                    Long responseTime = response.raw().receivedResponseAtMillis();
+                    Long apiTime = responseTime-requestTime;
+                    Toast.makeText(MainActivity.this, apiTime.toString(), Toast.LENGTH_SHORT).show();
+
+
+
+
+//                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -470,7 +461,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             @Override
             public void onResponse(Call<JSONUserResponse> call, Response<JSONUserResponse> response) {
                 if (response.body() != null && response.body().getTable().size() > 0) {
-                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
+//                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
 
 
                 }
@@ -485,15 +476,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Log.d("Error", t.getMessage());
 
 
-
-
             }
         });
-
-
-
-
-
 
 
     }
