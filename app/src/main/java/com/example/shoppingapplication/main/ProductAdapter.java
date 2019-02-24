@@ -52,6 +52,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
 
+
         private ImageView PRSMBL003ImageView;
         private TextView PRSMBL003TitleTextView;
         private TextView PRSMBL003StockTextView;
