@@ -277,6 +277,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
        sortChipsRv.setLayoutManager(new LinearLayoutManager(
                this, LinearLayoutManager.HORIZONTAL, true
        ));
+
+
+
+       sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
+           @Override
+           public void onClick(int sortType) {
+               MainActivity.this.sortType = sortType;
+              // observe();
+           }
+       }));
+
+
+
+
+
+
+
+
 //       sortChipsRv.setAdapter(new SortAdapter(this, sortType, new SortAdapter.OnSortClickListener() {
 //           @Override
 //           public void onClick(int sortType) {

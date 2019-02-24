@@ -14,10 +14,23 @@ import com.example.shoppingapplication.R;
 
 public class SortAdapter extends RecyclerView.Adapter<SortAdapter.SortViewHolder> {
     private String[] sortTypeIds = new String[]{
-            "جدیدترین",
-            "پربازدیدترین",
-            "قیمت از زیاد به کم",
-            "قیمت از کم به زیاد"
+            "مواد غذایی",
+            "حبوبات",
+            "چای",
+            "لوازم خانگی",
+            "مواد بهداشتی و آرایشی",
+            "مواد بهداشتی",
+            "مواد پاک کننده و سفید کننده",
+            "مواد شوینده",
+            "کفش",
+            "مواد پروتئینی",
+            "ترشیجات و سس",
+            "بیمه نوین",
+            " اسباب بازی",
+            " قند و شکر",
+            "پوشاک و پارچه",
+            "کامپیوتر و لوازم جانبی",
+            "لوازم التحریر"
     };
     private Context context;
     private int selectedSortType;
