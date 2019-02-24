@@ -12,11 +12,14 @@ import retrofit2.http.POST;
 public interface ApiService {
 
 
-    @GET("values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>001LOCALSELECT</proc><P1>010001</P1><P2></P2><P3></P3><P4>1</P4></Table></NewDataSet>")
+    @GET("api/values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>001LOCALSELECT</proc><P1>010001</P1><P2></P2><P3></P3><P4>1</P4></Table></NewDataSet>")
     Call<JsonResponse> getJSON();
 
-    @GET("values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>003TOTALSELECT</proc><P1>ADMIN</P1><P2>123456</P2><P3>MBLTYPEVISIT1</P3></Table></NewDataSet>")
+    @GET("api/values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>003TOTALSELECT</proc><P1>ADMIN</P1><P2>123456</P2><P3>MBLTYPEVISIT1</P3></Table></NewDataSet>")
     Call<JSONUserResponse> getUsersJSON();
+
+
+
 
 //    @GET("")
 //    Call<Banner> getBanner();
