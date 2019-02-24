@@ -101,7 +101,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
         setupViews();
-        addDrawer();
+       addDrawer();
+//              setupDrawer();
+
         menuBtn=findViewById(R.id.iv_main_menu);
 
         menuBtn.setOnClickListener(new View.OnClickListener() {
@@ -117,7 +119,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         drawerFont = ResourcesCompat.getFont(this, R.font.primary_regular);
         userInfoManager = new UserInfoManager1(this);
         viewModel = new MainViewModel();
-//        setupDrawer();
         observe();
     }
 
@@ -136,7 +137,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 .withActivity(this)
                 .withHeaderBackground(R.drawable.header)
                 .addProfiles(
-                        new ProfileDrawerItem().withName("سامانه همراه ملی").withEmail("http://www.hesabsazanparsian.com/")
+                        new ProfileDrawerItem().withName("سامانه همراه مالی").withEmail("http://www.hesabsazanparsian.com/")
                 )
                 .withOnAccountHeaderListener(new AccountHeader.OnAccountHeaderListener() {
                     @Override
@@ -150,6 +151,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         result = new DrawerBuilder()
                 .withActivity(this)
                 // .withToolbar(toolbar)
+                .withDrawerGravity(Gravity.RIGHT)
 
                 .addDrawerItems(
                         item1,
@@ -243,6 +245,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 //remove items with an identifier
         result.removeItem(2);
 
+
 //open / close the drawer
         result.openDrawer();
         result.closeDrawer();
@@ -314,78 +317,78 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    private void setupDrawer() {
-        accountHeader = new AccountHeaderBuilder()
-                .addProfiles(
-                        profileDrawerItem
-                )
-
-                .withActivity(this)
-                .withTypeface(drawerFont)
-                .withHeaderBackground(ContextCompat.getDrawable(MainActivity.this, R.color.colorPrimary))
-                .build();
-
-        cartDrawerItem = new PrimaryDrawerItem().withName("سبد خرید")
-
-                .withTypeface(drawerFont)
-                .withBadge("0")
-
-                .withBadgeStyle(new BadgeStyle()
-                        .withBadgeBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.shape_badge))
-                        .withTextColor(ContextCompat.getColor(MainActivity.this, R.color.white)))
-                .withSelectable(false);
-        PrimaryDrawerItem orderHistoryDrawerItem = new PrimaryDrawerItem()
-                .withName("سوابق سفارش")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem personalOrder = new PrimaryDrawerItem()
-                .withName("سفارشات شخصی")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem ordersOfOthers = new PrimaryDrawerItem()
-                .withName("سفارشات دیگران")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem outputReports = new PrimaryDrawerItem()
-                .withName("گزارشات خروجی")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-        PrimaryDrawerItem documents = new PrimaryDrawerItem()
-                .withName("پرونده ها")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem products = new PrimaryDrawerItem()
-                .withName("سرفصل کالاها")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-        PrimaryDrawerItem setting = new PrimaryDrawerItem()
-                .withName("تنظیمات")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem about = new PrimaryDrawerItem()
-                .withName("سوابق سفارش")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-        PrimaryDrawerItem exit = new PrimaryDrawerItem()
-                .withName("سوابق سفارش")
-                .withSelectable(false)
-                .withTypeface(drawerFont);
-
-
-        drawer = new DrawerBuilder()
-                .withActivity(this)
-                .withSelectedItem(-1)
-                .withAccountHeader(accountHeader)
-                .addDrawerItems(cartDrawerItem, orderHistoryDrawerItem, authDrawerItem)
-                .withDrawerGravity(Gravity.RIGHT)
-                .build();
-    }
+//    private void setupDrawer() {
+//        accountHeader = new AccountHeaderBuilder()
+//                .addProfiles(
+//                        profileDrawerItem
+//                )
+//
+//                .withActivity(this)
+//                .withTypeface(drawerFont)
+//                .withHeaderBackground(ContextCompat.getDrawable(MainActivity.this, R.color.colorPrimary))
+//                .build();
+//
+//        cartDrawerItem = new PrimaryDrawerItem().withName("سبد خرید")
+//
+//                .withTypeface(drawerFont)
+//                .withBadge("0")
+//
+//                .withBadgeStyle(new BadgeStyle()
+//                        .withBadgeBackground(ContextCompat.getDrawable(MainActivity.this, R.drawable.shape_badge))
+//                        .withTextColor(ContextCompat.getColor(MainActivity.this, R.color.white)))
+//                .withSelectable(false);
+//        PrimaryDrawerItem orderHistoryDrawerItem = new PrimaryDrawerItem()
+//                .withName("سوابق سفارش")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem personalOrder = new PrimaryDrawerItem()
+//                .withName("سفارشات شخصی")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem ordersOfOthers = new PrimaryDrawerItem()
+//                .withName("سفارشات دیگران")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem outputReports = new PrimaryDrawerItem()
+//                .withName("گزارشات خروجی")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//        PrimaryDrawerItem documents = new PrimaryDrawerItem()
+//                .withName("پرونده ها")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem products = new PrimaryDrawerItem()
+//                .withName("سرفصل کالاها")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//        PrimaryDrawerItem setting = new PrimaryDrawerItem()
+//                .withName("تنظیمات")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem about = new PrimaryDrawerItem()
+//                .withName("سوابق سفارش")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//        PrimaryDrawerItem exit = new PrimaryDrawerItem()
+//                .withName("سوابق سفارش")
+//                .withSelectable(false)
+//                .withTypeface(drawerFont);
+//
+//
+//        drawer = new DrawerBuilder()
+//                .withActivity(this)
+//                .withSelectedItem(-1)
+//                .withAccountHeader(accountHeader)
+//                .addDrawerItems(cartDrawerItem, orderHistoryDrawerItem, authDrawerItem)
+//                .withDrawerGravity(Gravity.LEFT)
+//                .build();
+//    }
 
 
     private void observe() {
