@@ -83,14 +83,22 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
 
             android:orientation="vertical">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_slider"
+            <ss.com.bannerslider.Slider
+                android:id="@+id/banner_slider1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="140dp">
+                android:layout_height="220dp"
+                app:slider_interval="5000"
+                app:slider_loopSlides="true"
 
-            </android.support.v7.widget.RecyclerView>
+                />
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:id="@+id/rv_main_slider"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:minHeight="140dp">-->
+
+            <!--</android.support.v7.widget.RecyclerView>-->
 
             <ScrollView
                 android:layout_width="match_parent"

@@ -23,6 +23,8 @@ import com.example.shoppingapplication.model.PRSMBL004;
 import com.example.shoppingapplication.model.PRSMBL005;
 import com.example.shoppingapplication.model.api.JSONUserResponse;
 import com.example.shoppingapplication.model.api.JsonResponse;
+import com.example.shoppingapplication.slider.MainSliderAdapter;
+import com.example.shoppingapplication.slider.PicassoImageLoadingService;
 import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
@@ -44,6 +46,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ss.com.bannerslider.Slider;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MainViewModel viewModel;
@@ -260,6 +263,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
 
    private void setupViews() {
+       Slider.init(new PicassoImageLoadingService(this));
+
+       Slider slider = findViewById(R.id.banner_slider1);
+       slider.setAdapter(new MainSliderAdapter());
+
 //        progressBar = findViewById(R.id.frame_main_progressBarContainer);
 
 //        bottomNavigation = findViewById(R.id.bottomNavigation_main);
@@ -305,12 +313,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 this, LinearLayoutManager.HORIZONTAL, true
         ));
 
-        bannerRecyclerView = findViewById(R.id.rv_main_slider);
-        bannerRecyclerView.setLayoutManager(new LinearLayoutManager(
-                this,LinearLayoutManager.HORIZONTAL,true
-        ));
-        bannerAdapter = new BannerAdapter();
-        bannerRecyclerView.setAdapter(bannerAdapter);
+//        bannerRecyclerView = findViewById(R.id.rv_main_slider);
+//        bannerRecyclerView.setLayoutManager(new LinearLayoutManager(
+//                this,LinearLayoutManager.HORIZONTAL,true
+//        ));
+//        bannerAdapter = new BannerAdapter();
+//        bannerRecyclerView.setAdapter(bannerAdapter);
 
 
 
