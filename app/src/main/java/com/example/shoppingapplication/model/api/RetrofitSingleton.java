@@ -16,7 +16,7 @@ public class RetrofitSingleton {
     public static Retrofit getInstance() {
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
-                    .baseUrl("http://37.191.82.13:6139/")
+                    .baseUrl("http://192.168.200.10:6139/")
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .addConverterFactory(GsonConverterFactory.create())
 

@@ -26,6 +26,10 @@ public interface NewsDataSource {
     Single<List<PRSMBL009>> getPRSMBL009();
 
 
+    Single<List<PRSMBL003>> search(String keyword);
+
+
+
 
 
 }

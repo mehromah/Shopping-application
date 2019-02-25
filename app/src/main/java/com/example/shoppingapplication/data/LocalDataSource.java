@@ -1,6 +1,8 @@
 package com.example.shoppingapplication.data;
 
 import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 
 import com.example.shoppingapplication.model.PRSMBL003;
@@ -39,6 +41,20 @@ public abstract class LocalDataSource implements NewsDataSource {
 //    @android.arch.persistence.room.Query("DELETE FROM tbl_user")
 //    public abstract void removeAllRows();
 
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    public abstract void savePRSMBL003List(List<PRSMBL003> prsmbl003List);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    public abstract void savePRSMBL004List(List<PRSMBL004> prsmbl004List);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    public abstract void savePRSMBL005List(List<PRSMBL005> prsmbl005List);
+
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    public abstract void savePRSMBL009List(List<PRSMBL009> prsmbl009List);
+
+
+
     @Query("SELECT * FROM tbl_PRSMBL003")
     @Override
     public Single<List<PRSMBL003>> getPRSMBL003() {
@@ -63,6 +79,18 @@ public abstract class LocalDataSource implements NewsDataSource {
     public Single<List<PRSMBL009>> getPRSMBL009() {
         return null;
     }
+
+
+    @Query("SELECT * FROM tbl_PRSMBL003 WHERE mCMBL003011 LIKE '%' || :keyword || '%'")
+    @Override
+    public abstract Single<List<PRSMBL003>> search(String keyword);
+
+    @Query("DELETE FROM tbl_prsmbl003")
+    public abstract void removeAllRows();
+
+
+
+
 
 
 
