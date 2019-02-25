@@ -52,7 +52,6 @@ import ss.com.bannerslider.Slider;
 public class MainActivity extends BaseActivity implements View.OnClickListener {
     private MainViewModel viewModel;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
-    private BannerAdapter bannerAdapter;
     private Drawer drawer;
     private UserInfoManager1 userInfoManager;
     private PrimaryDrawerItem authDrawerItem;
@@ -426,9 +425,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                     data = response.body().getPrsmbl003List();
                     data1 = response.body().getPrsmbl004List();
                     data2 = response.body().getPrsmbl005List();
-                    prsmbl003Adapter = new PRSMBL003Adapter(data);
-                    prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
+//                    prsmbl003Adapter = new PRSMBL003Adapter(data);
+//                    prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
+
                     productAdapter = new ProductAdapter(data, data1, data2);
+                    prsmbl003RecyclerView.setAdapter(productAdapter);
                     productRecyclerView.setAdapter(productAdapter);
 
 

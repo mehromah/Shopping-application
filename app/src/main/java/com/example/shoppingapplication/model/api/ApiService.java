@@ -1,13 +1,7 @@
 package com.example.shoppingapplication.model.api;
 
-import com.example.shoppingapplication.model.Banner;
-
-import io.reactivex.Single;
 import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
-import retrofit2.http.POST;
 
 public interface ApiService {
 

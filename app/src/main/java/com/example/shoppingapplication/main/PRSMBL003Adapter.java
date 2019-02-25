@@ -33,7 +33,7 @@ public class PRSMBL003Adapter extends RecyclerView.Adapter<PRSMBL003Adapter.PRSM
 
     @Override
     public void onBindViewHolder(@NonNull PRSMBL003ViewHolder holder, int position) {
-        Picasso.get().load("http://192.168.200.10:6139/images/"+Table.get(position).getCMBL003010()+".jpg").into(holder.PRSMBL003ImageView);
+        Picasso.get().load("http://37.191.82.13:6139/images/"+Table.get(position).getCMBL003010()+".jpg").into(holder.PRSMBL003ImageView);
 
         holder.PRSMBL003TitleTextView.setText(Table.get(position).getCMBL003011());
         holder.PRSMBL003StockTextView.setText(Table.get(position).getNMBL003015());
