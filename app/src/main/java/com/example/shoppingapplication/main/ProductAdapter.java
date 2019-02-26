@@ -41,7 +41,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 
     @Override
     public void onBindViewHolder(@NonNull ProductViewHolder holder, int position) {
-        Picasso.get().load("http://37.191.82.13:6139/images/"+Table.get(position).getCMBL003010()+".jpg").into(holder.PRSMBL003ImageView);
+        Picasso.get().load("http://192.168.200.10:6139/images/"+Table.get(position).getCMBL003010()+".jpg").into(holder.PRSMBL003ImageView);
         holder.PRSMBL003TitleTextView.setText(Table.get(position).getCMBL003011());
         holder.PRSMBL003StockTextView.setText( Table.get(position).getNMBL003015());
         holder.PRSMBL003GroupNameTextView.setText(Table.get(position).getCMBL003016());

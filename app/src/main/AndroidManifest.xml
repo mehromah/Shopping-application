@@ -11,17 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.OrdersActivity"></activity>
+        <activity android:name=".auth1.SplashActivity"></activity>
+        <activity android:name=".main.OrdersActivity" />
         <activity android:name=".main.ReportActivity" />
-        <activity android:name=".auth1.AuthenticationActivity"/>
-
-
-        <activity android:name=".main.MainActivity">
+        <activity android:name=".auth1.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".main.MainActivity">
 
         </activity>
     </application>

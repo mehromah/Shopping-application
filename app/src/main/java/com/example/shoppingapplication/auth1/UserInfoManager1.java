@@ -28,3 +28,6 @@ public class UserInfoManager1 {
         sharedPreferences.edit().clear().apply();
     }
 }
+
+
+

@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.example.shoppingapplication.R;
 import com.example.shoppingapplication.base.BaseActivity;
-import com.example.shoppingapplication.main.MainActivity;
+
 import com.example.shoppingapplication.model.PRSMBL009;
 import com.example.shoppingapplication.model.api.JSONUserResponse;
 
@@ -70,8 +70,8 @@ public class AuthenticationActivity extends BaseActivity {
                         public void onResponse(Call<JSONUserResponse> call, Response<JSONUserResponse> response) {
                             JSONUserResponse jsonUserResponse = response.body();
                             assert jsonUserResponse != null;
-//                            userData = jsonUserResponse.getTable()
-                            startActivity(new Intent(AuthenticationActivity.this, MainActivity.class));
+//                            userData = jsonUserResponse.getTable().toArray(new PRSMBL009[0]);
+                            startActivity(new Intent(AuthenticationActivity.this, SplashActivity.class));
                             Toast.makeText(AuthenticationActivity.this, "خوش آمدید", Toast.LENGTH_LONG).show();
 
 
