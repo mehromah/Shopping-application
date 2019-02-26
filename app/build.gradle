@@ -56,7 +56,10 @@ dependencies {
     implementation 'com.ss.bannerslider:bannerslider:2.0.0'
     implementation "com.airbnb.android:lottie:2.7.0"
 
-//    implementation project(':bottomnavigation')
+
+    implementation 'ss.com.infinitescrollprovider:infinitescrollprovider:1.1'
+
+
 
 
 }
