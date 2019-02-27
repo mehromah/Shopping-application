@@ -15,11 +15,14 @@ import com.example.shoppingapplication.model.PRSMBL003;
 import com.example.shoppingapplication.model.PRSMBL004;
 import com.example.shoppingapplication.model.PRSMBL005;
 import com.example.shoppingapplication.model.api.ApiService;
+import com.example.shoppingapplication.model.api.JsonResponse;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductViewHolder> {
+    private List<JsonResponse> jsonResponses;
     private List<PRSMBL003> Table ;
     private List<PRSMBL004> Table1 ;
     private List<PRSMBL005> Table2 ;
@@ -28,6 +31,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         this.Table = Table;
         this.Table1 = Table1;
         this.Table2 = Table2;
+    }
+
+    void setProduct(List<JsonResponse> jsonResponses){
+        this.jsonResponses = jsonResponses;
+        notifyDataSetChanged();
     }
 
 
@@ -87,4 +95,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
 //        }
 
     }
+
+
+
+
+
 }
