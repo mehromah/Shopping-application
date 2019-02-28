@@ -144,4 +144,8 @@ public class PRSMBL009 {
         mNMBL009013 = nMBL009013;
     }
 
+
+    public PRSMBL009(){
+
+    }
 }
