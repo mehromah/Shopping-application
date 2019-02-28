@@ -4,6 +4,7 @@ import com.example.shoppingapplication.model.api.ApiService;
 import com.example.shoppingapplication.model.api.JSONUserResponse;
 import com.example.shoppingapplication.providers.ApiServiceProvider;
 
+import io.reactivex.Single;
 import io.reactivex.subjects.BehaviorSubject;
 import retrofit2.Call;
 
