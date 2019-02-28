@@ -1,19 +1,20 @@
 package com.example.shoppingapplication.main;
 
+import android.arch.lifecycle.Observer;
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.shoppingapplication.R;
 import com.example.shoppingapplication.auth1.UserInfoManager1;
@@ -21,7 +22,6 @@ import com.example.shoppingapplication.base.BaseActivity;
 import com.example.shoppingapplication.model.PRSMBL003;
 import com.example.shoppingapplication.model.PRSMBL004;
 import com.example.shoppingapplication.model.PRSMBL005;
-import com.example.shoppingapplication.model.api.JSONUserResponse;
 import com.example.shoppingapplication.model.api.JsonResponse;
 import com.example.shoppingapplication.slider.MainSliderAdapter;
 import com.example.shoppingapplication.slider.PicassoImageLoadingService;
@@ -30,7 +30,6 @@ import com.mikepenz.materialdrawer.AccountHeader;
 import com.mikepenz.materialdrawer.AccountHeaderBuilder;
 import com.mikepenz.materialdrawer.Drawer;
 import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.holder.BadgeStyle;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
@@ -38,19 +37,19 @@ import com.mikepenz.materialdrawer.model.SecondaryDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.List;
 import java.util.Stack;
 
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import ss.com.bannerslider.Slider;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
-    private MainViewModel viewModel;
+
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Drawer drawer;
     private UserInfoManager1 userInfoManager;
@@ -79,6 +78,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private ImageView menuBtn;
     public Drawer result;
+    private MainViewModel viewModel;
 
 
     public static final String EXTRA_KEY_SORT = "sort";
@@ -102,6 +102,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextMessage = findViewById(R.id.message);
+       viewModel = new MainViewModel(getApplication());
+//          viewModel = ViewModelProviders.of(this).get(MainViewModel.class);
 
 
         setupViews();
@@ -122,7 +124,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
         drawerFont = ResourcesCompat.getFont(this, R.font.primary_regular);
         userInfoManager = new UserInfoManager1(this);
-        viewModel = new MainViewModel();
         observe();
     }
 
@@ -327,6 +328,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 this, LinearLayoutManager.HORIZONTAL, true
         ));
 
+
+
         prsmbl003RecyclerView = findViewById(R.id.rv_main_latestProducts);
         prsmbl003RecyclerView.setLayoutManager(new LinearLayoutManager(
                 this, LinearLayoutManager.HORIZONTAL, true
@@ -418,70 +421,82 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private void observe() {
 
-        viewModel.call.enqueue(new Callback<JsonResponse>() {
-            @Override
-            public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
-                if (response.body() != null && response.body().getPrsmbl003List().size() > 0) {
-                    data = response.body().getPrsmbl003List();
-                    data1 = response.body().getPrsmbl004List();
-                    data2 = response.body().getPrsmbl005List();
+//        viewModel.call.enqueue(new Callback<JsonResponse>() {
+//            @Override
+//            public void onResponse(Call<JsonResponse> call, Response<JsonResponse> response) {
+//                if (response.body() != null && response.body().getPrsmbl003List().size() > 0) {
+//                    data = response.body().getPrsmbl003List();
+//                    data1 = response.body().getPrsmbl004List();
+//                    data2 = response.body().getPrsmbl005List();
 //                    prsmbl003Adapter = new PRSMBL003Adapter(data);
 //                    prsmbl003RecyclerView.setAdapter(prsmbl003Adapter);
 
-                    productAdapter = new ProductAdapter(data, data1, data2);
-                    prsmbl003RecyclerView.setAdapter(productAdapter);
-                    productRecyclerView.setAdapter(productAdapter);
+
+        // Add an observer on the LiveData returned by getAlphabetizedWords.
+        // The onChanged() method fires when the observed data changes and the activity is
+        // in the foreground.
+
+
+//        viewModel.getJsonResponse().observe(this, new Observer<List<JsonResponse>>() {
+//            @Override
+//            public void onChanged(@Nullable List<JsonResponse> jsonResponses) {
+//                productAdapter.setProduct(jsonResponses);
+//            }
+//        });
 
 
 
-                    Long requestTime = response.raw().sentRequestAtMillis();
-                    Long responseTime = response.raw().receivedResponseAtMillis();
-                    Long apiTime = responseTime-requestTime;
-                    Toast.makeText(MainActivity.this, apiTime.toString(), Toast.LENGTH_SHORT).show();
 
 
+        viewModel.getJsonResponse().subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doOnNext(new Consumer<List<JsonResponse>>() {
+                    @Override
+                    public void accept(List<JsonResponse> jsonResponses) throws Exception {
+                        viewModel.getJsonResponse();
+                        productAdapter.setProduct(jsonResponses);
+                      //  data = response.body().getPrsmbl003List();
+
+
+                    }
+                });
+       // productAdapter = new ProductAdapter(data, data1, data2);
+        prsmbl003RecyclerView.setAdapter(productAdapter);
+        productRecyclerView.setAdapter(productAdapter);
+
+
+
+
+
+
+
+
+
+//                    Long requestTime = response.raw().sentRequestAtMillis();
+//                    Long responseTime = response.raw().receivedResponseAtMillis();
+//                    Long apiTime = responseTime-requestTime;
+//                    Toast.makeText(MainActivity.this, apiTime.toString(), Toast.LENGTH_SHORT).show();
 
 
 //                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
 
-                }
+//    }
 
 
             }
 
-            @Override
-            public void onFailure(Call<JsonResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "خطا در دریافت اطلاعات", Toast.LENGTH_LONG).show();
-
-                Log.d("Error", t.getMessage());
-
-            }
-        });
-
-        viewModel.callUser.enqueue(new Callback<JSONUserResponse>() {
-            @Override
-            public void onResponse(Call<JSONUserResponse> call, Response<JSONUserResponse> response) {
-                if (response.body() != null && response.body().getTable().size() > 0) {
-//                    Toast.makeText(MainActivity.this, "اطلاعات با موفقیت دریافت شد", Toast.LENGTH_LONG).show();
+//            @Override
+//            public void onFailure(Call<JsonResponse> call, Throwable t) {
+//                Toast.makeText(MainActivity.this, "خطا در دریافت اطلاعات", Toast.LENGTH_LONG).show();
+//
+//                Log.d("Error", t.getMessage());
+//
+//            }
+//        });
 
 
-                }
 
 
-            }
-
-            @Override
-            public void onFailure(Call<JSONUserResponse> call, Throwable t) {
-                Toast.makeText(MainActivity.this, "خطا در دریافت اطلاعات", Toast.LENGTH_LONG).show();
-
-                Log.d("Error", t.getMessage());
-
-
-            }
-        });
-
-
-    }
 
     @Override
     protected void onResume() {
@@ -490,11 +505,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        compositeDisposable.clear();
-    }
+
 
 
     @Override
