@@ -16,7 +16,7 @@ public interface ApiService {
     Flowable<List<JsonResponse>> getJSON();
 
     @GET("api/values?url=<NewDataSet><Table><ver>1_02.01.06</ver><proc>003TOTALSELECT</proc><P1>ADMIN</P1><P2>123456</P2><P3>MBLTYPEVISIT1</P3></Table></NewDataSet>")
-    Single<JSONUserResponse> getUsersJSON();
+    Call<JSONUserResponse> getUsersJSON();
 
 
 
