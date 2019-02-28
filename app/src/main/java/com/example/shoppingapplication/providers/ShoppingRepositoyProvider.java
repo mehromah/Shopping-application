@@ -7,7 +7,7 @@ import com.example.shoppingapplication.data.ShoppingRepository;
 
 public class ShoppingRepositoyProvider {
 
-    public static ShoppingDataSource provideNewsDataSource(Context context) {
+    public static ShoppingDataSource provideShoppingDataSource(Context context) {
         return new ShoppingRepository(context);
     }
 }
