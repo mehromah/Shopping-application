@@ -1,6 +1,8 @@
 package com.example.shoppingapplication.model.api;
 
 
+import android.arch.persistence.room.Entity;
+
 import com.example.shoppingapplication.model.PRSMBL003;
 import com.example.shoppingapplication.model.PRSMBL004;
 import com.example.shoppingapplication.model.PRSMBL005;
