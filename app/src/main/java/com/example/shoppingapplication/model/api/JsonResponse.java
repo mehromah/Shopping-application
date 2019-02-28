@@ -1,7 +1,9 @@
 package com.example.shoppingapplication.model.api;
 
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
+import android.support.annotation.ArrayRes;
 
 import com.example.shoppingapplication.model.PRSMBL003;
 import com.example.shoppingapplication.model.PRSMBL004;
