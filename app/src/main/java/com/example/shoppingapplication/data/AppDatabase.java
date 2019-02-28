@@ -4,6 +4,8 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 
 import com.example.shoppingapplication.model.PRSMBL003;
 import com.example.shoppingapplication.model.PRSMBL004;
@@ -18,12 +20,18 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public static AppDatabase getInstance(Context context) {
         if (instance == null) {
-            instance = Room.databaseBuilder(context, AppDatabase.class, "shopping_db").allowMainThreadQueries().build();
+            instance = Room.databaseBuilder(context, AppDatabase.class, "shopping_db").allowMainThreadQueries()
+                    .build();
         }
         return instance;
     }
 
 
 
-
 }
+
+
+
+
+
+
