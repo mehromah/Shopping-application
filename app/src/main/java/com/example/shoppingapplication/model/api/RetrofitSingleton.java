@@ -1,5 +1,7 @@
 package com.example.shoppingapplication.model.api;
 
+import com.example.shoppingapplication.data.ShoppingDataSource;
+
 import java.io.IOException;
 
 import okhttp3.Interceptor;
@@ -10,7 +12,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RetrofitSingleton {
+public abstract class RetrofitSingleton implements ShoppingDataSource {
     private static Retrofit retrofit;
 
     public static Retrofit getInstance() {
@@ -26,7 +28,7 @@ public class RetrofitSingleton {
         return retrofit;
     }
 
-    private RetrofitSingleton() {
+    public RetrofitSingleton() {
 
     }
 }
